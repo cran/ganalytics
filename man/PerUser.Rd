@@ -4,6 +4,8 @@
 \name{PerUser}
 \alias{PerUser}
 \alias{PerUser,ANY-method}
+\alias{PerUser,gaSegmentSequenceStep-method}
+\alias{PerUser,gaSegmentSequenceFilter-method}
 \alias{PerUser,gaMetExpr-method}
 \alias{PerUser,formula-method}
 \title{PerUser.}
@@ -11,6 +13,10 @@
 PerUser(object, ..., negation)
 
 \S4method{PerUser}{ANY}(object, ..., negation)
+
+\S4method{PerUser}{gaSegmentSequenceStep}(object, ..., negation)
+
+\S4method{PerUser}{gaSegmentSequenceFilter}(object, ..., negation)
 
 \S4method{PerUser}{gaMetExpr}(object, ..., negation)
 
@@ -28,8 +34,8 @@ coerce into a user scoped gaDynSegment.}
 \value{
 a gaMetExpr, .gaSegmentFilter or gaDynSegment.
 
-  To define a gaDynSegment comprised of a single metric expression,
-  wrap the metric expression in an \code{Include} or \code{Exclude} call.
+To define a gaDynSegment comprised of a single metric expression,
+wrap the metric expression in an \code{Include} or \code{Exclude} call.
 }
 \description{
 Set the scope of a .gaSegmentFilter or gaMetExpr object to user-level.
@@ -38,6 +44,12 @@ Set the scope of a .gaSegmentFilter or gaMetExpr object to user-level.
 \itemize{
 \item \code{ANY}: Create a user-level segment filter list from the supplied
 expressions, each interpreted as an include segment filter.
+
+\item \code{gaSegmentSequenceStep}: Create a user-level segment sequence filter from the supplied
+sequence expression.
+
+\item \code{gaSegmentSequenceFilter}: Create a user-level segment sequence filter from the supplied
+sequence expression.
 
 \item \code{gaMetExpr}: Set the scope of the supplied metric condition to
 user-level.

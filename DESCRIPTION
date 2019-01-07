@@ -1,7 +1,7 @@
 Package: ganalytics
 Title: Interact with 'Google Analytics'
-Version: 0.10.4
-Date: 2018-06-23
+Version: 0.10.6
+Date: 2018-12-22
 Authors@R: person(
     given = "Johann",
     family = "de Boer",
@@ -17,12 +17,13 @@ Description: Functions for querying the 'Google Analytics' core reporting,
 URL: https://github.com/jdeboer/ganalytics
 BugReports: https://github.com/jdeboer/ganalytics/issues
 License: MIT + file LICENCE
-Depends: R(>= 3.1.0)
+Depends: R(>= 3.3.0)
 Imports: assertthat (>= 0.2.0), httpuv, httr (>= 1.0.0),
-        googleAnalyticsR (>= 0.5.0), jsonlite, lazyeval, lubridate,
+        googleAnalyticsR (>= 0.6.0), jsonlite, lazyeval, lubridate,
         methods, plyr, R6, rvest, stringr (>= 1.0), XML, xml2, scales,
         selectr
-Suggests: devtools, ggplot2, knitr, rmarkdown, testthat
+Suggests: devtools, ggplot2, knitr, rmarkdown, testthat, dplyr, purrr,
+        tidyr, spelling, covr
 Collate: 'Bool-generics.R' 'utils.R' 'Segment-generics.R'
         'GaApiRequest.R' 'meta.R' 'globaldata.R' 'Expr-generics.R'
         'operand-classes.R' 'comparator-classes.R' 'var-classes.R'
@@ -45,10 +46,12 @@ Collate: 'Bool-generics.R' 'utils.R' 'Segment-generics.R'
         'zzz.R'
 VignetteBuilder: knitr
 LazyData: TRUE
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8
+Language: en-GB
 NeedsCompilation: no
-Packaged: 2018-06-25 10:26:34 UTC; Johann
+Packaged: 2019-01-07 10:40:39 UTC; Johann
 Author: Johann de Boer [aut, cre]
 Maintainer: Johann de Boer <johanndeboer@gmail.com>
 Repository: CRAN
-Date/Publication: 2018-07-01 13:30:39 UTC
+Date/Publication: 2019-01-07 16:40:45 UTC

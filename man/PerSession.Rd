@@ -4,6 +4,8 @@
 \name{PerSession}
 \alias{PerSession}
 \alias{PerSession,ANY-method}
+\alias{PerSession,gaSegmentSequenceStep-method}
+\alias{PerSession,gaSegmentSequenceFilter-method}
 \alias{PerSession,gaMetExpr-method}
 \alias{PerSession,formula-method}
 \title{PerSession.}
@@ -11,6 +13,10 @@
 PerSession(object, ..., negation)
 
 \S4method{PerSession}{ANY}(object, ..., negation)
+
+\S4method{PerSession}{gaSegmentSequenceStep}(object, ..., negation)
+
+\S4method{PerSession}{gaSegmentSequenceFilter}(object, ..., negation)
 
 \S4method{PerSession}{gaMetExpr}(object, ..., negation)
 
@@ -28,8 +34,8 @@ coerce into a session scoped gaDynSegment.}
 \value{
 a gaMetExpr, .gaSegmentFilter or gaDynSegment.
 
-  To define a gaDynSegment comprised of a single metric expression,
-  wrap the metric expression in an \code{Include} or \code{Exclude} call.
+To define a gaDynSegment comprised of a single metric expression,
+wrap the metric expression in an \code{Include} or \code{Exclude} call.
 }
 \description{
 Set the scope of a .gaSegmentFilter or gaMetExpr object to session-level.
@@ -38,6 +44,12 @@ Set the scope of a .gaSegmentFilter or gaMetExpr object to session-level.
 \itemize{
 \item \code{ANY}: Create a session level segment filter list from the
 supplied expressions, interpreted as condition filters.
+
+\item \code{gaSegmentSequenceStep}: Create a session-level segment sequence filter from the supplied
+sequence expression.
+
+\item \code{gaSegmentSequenceFilter}: Create a session-level segment sequence filter from the supplied
+sequence expression.
 
 \item \code{gaMetExpr}: Set the scope of the supplied metric condition to
 session-level.

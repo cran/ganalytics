@@ -3,7 +3,7 @@
 #' @include Segment-generics.R
 #' @include segment-coerce.R
 #' @include management-api-classes.R
-#' @importFrom methods new setMethod
+#' @importFrom methods new setMethod callNextMethod
 NULL
 
 setSegmentFilterScopeNegation <- function(object, negation, scope) {
@@ -58,14 +58,14 @@ setMethod(
   definition = function(object, ..., negation, scope) {
     exprList <- unnest_objects(object, ..., class = "gaSegmentConditionFilter")
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, ".compoundExpr")}))
-    x <- if(missing(negation) & missing(scope)) {
-      setSegmentFilterScopeNegation(object)
+    if(missing(negation) & missing(scope)) {
+      setSegmentFilterScopeNegation(exprList)
     } else if (!missing(negation) & missing(scope)) {
-      setSegmentFilterScopeNegation(object, negation = negation)
+      setSegmentFilterScopeNegation(exprList, negation = negation)
     } else if (missing(negation) & !missing(scope)) {
-      setSegmentFilterScopeNegation(object, scope = scope)
+      setSegmentFilterScopeNegation(exprList, scope = scope)
     } else if (!missing(negation) & !missing(scope)) {
-      setSegmentFilterScopeNegation(object, negation = negation, scope = scope)
+      setSegmentFilterScopeNegation(exprList, negation = negation, scope = scope)
     }
   }
 )
@@ -92,9 +92,10 @@ setMethod(
 )
 
 setMethod(
-  "initialize",
+  f = "initialize",
   signature = "gaDynSegment",
-  definition = function(.Object, value, name) {
+  definition = function(.Object, value, name, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if(!missing(value)) {
       .Object@.Data <- value
     }
@@ -186,6 +187,26 @@ setMethod(
   }
 )
 
+#' @describeIn PerSession Create a session-level segment sequence filter from the supplied
+#'   sequence expression.
+setMethod(
+  f = "PerSession",
+  signature = "gaSegmentSequenceStep",
+  definition = function(object, ...) {
+    Sequence(object, ..., scope = "sessions")
+  }
+)
+
+#' @describeIn PerSession Create a session-level segment sequence filter from the supplied
+#'   sequence expression.
+setMethod(
+  f = "PerSession",
+  signature = "gaSegmentSequenceFilter",
+  definition = function(object, ...) {
+    Sequence(object, ..., scope = "sessions")
+  }
+)
+
 #' @describeIn PerSession Set the scope of the supplied metric condition to
 #'   session-level.
 setMethod(
@@ -218,6 +239,26 @@ setMethod(
   signature = "ANY",
   definition = function(object, ...) {
     SegmentConditionFilter(object, ..., scope = "users")
+  }
+)
+
+#' @describeIn PerUser Create a user-level segment sequence filter from the supplied
+#'   sequence expression.
+setMethod(
+  f = "PerUser",
+  signature = "gaSegmentSequenceStep",
+  definition = function(object, ...) {
+    Sequence(object, ..., scope = "users")
+  }
+)
+
+#' @describeIn PerUser Create a user-level segment sequence filter from the supplied
+#'   sequence expression.
+setMethod(
+  f = "PerUser",
+  signature = "gaSegmentSequenceFilter",
+  definition = function(object, ...) {
+    Sequence(object, ..., scope = "users")
   }
 )
 
@@ -307,7 +348,8 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = "gaSegmentId",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if (!missing(value)) {
       value <- sub(kGaPrefix, "gaid::", value)
       if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
@@ -380,7 +422,8 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = "gaSegmentList",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if (!missing(value)) {
       segment_names <- names(value)
       .Object@.Data <- lapply(seq_along(value), function(i) {

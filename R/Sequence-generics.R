@@ -15,9 +15,8 @@
 #' @export
 setGeneric(
   "Later",
-  function(object, ...) {},
-  valueClass = "gaSegmentSequenceStep",
-  useAsDefault = FALSE
+  function(object, ...) {standardGeneric("Later")},
+  valueClass = "gaSegmentSequenceStep"
 )
 
 #' Then.
@@ -36,9 +35,8 @@ setGeneric(
 #' @seealso \code{\link{Sequence}}
 setGeneric(
   "Then",
-  function(object, ...) {},
-  valueClass = "gaSegmentSequenceStep",
-  useAsDefault = FALSE
+  function(object, ...) {standardGeneric("Then")},
+  valueClass = "gaSegmentSequenceStep"
 )
 
 #' First.
@@ -59,9 +57,8 @@ setGeneric(
 #' @seealso \code{\link{Sequence}}
 setGeneric(
   "First",
-  function(object, ...) {},
-  valueClass = "gaSegmentSequenceStep",
-  useAsDefault = FALSE
+  function(object, ...) {standardGeneric("First")},
+  valueClass = "gaSegmentSequenceStep"
 )
 
 #' Sequence.
@@ -107,12 +104,11 @@ setGeneric(
 #' @export
 setGeneric(
   "Sequence",
-  function(object, ..., negation = FALSE, scope = "sessions") {
+  function(object, ..., negation, scope) {
     if (!missing(negation)) {
       warning("Argument 'negation' is deprecated. Instead, please wrap the sequence or condtion within an Include or Exclude call.")
     }
     standardGeneric("Sequence")
   },
-  valueClass = "gaSegmentSequenceFilter",
-  useAsDefault = FALSE
+  valueClass = "gaSegmentSequenceFilter"
 )
