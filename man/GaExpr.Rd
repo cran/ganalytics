@@ -4,7 +4,7 @@
 \name{GaExpr}
 \alias{GaExpr}
 \alias{GaExpr,character,character-method}
-\title{GaExpr.}
+\title{GaExpr}
 \usage{
 GaExpr(object, comparator, operand, metricScope = "")
 
@@ -13,28 +13,31 @@ GaExpr(object, comparator, operand, metricScope = "")
 }
 \arguments{
 \item{object}{A dimension or metric variable, or another object to be coerced
-to an .expr object.}
+to an \code{.expr} object.}
 
 \item{comparator}{The comparator to use for the expression.}
 
 \item{operand}{The operand to use for the expression.}
 
-\item{metricScope}{Optional scope to use for segmentation if using a metric.
-Possible values include "perUser" or "perSession".}
+\item{metricScope}{Optional scope to use in the case of metric variables for
+segmentation. Possible values include \code{"perUser"} or
+\code{"perSession"}.}
 }
 \description{
 Create a Core Reporting API expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{object = character,comparator = character}: Return a Google Analytics expression using the described
+\item \code{object = character,comparator = character}: Return a Google Analytics expression using the supplied
 variable, operator and operand.
+bounces <- GaExpr("bounces", ">", 0)
 }}
 
 \examples{
 myQuery <- GaQuery(view = 123456789)
 source_matches_google <- GaExpr("source", "~", "google")
 TableFilter(myQuery) <- source_matches_google
+
 }
 \seealso{
 Other expression generators: \code{\link{Expr}},

@@ -1,10 +1,14 @@
-#' Comparator.
+#' Comparator
 #'
-#' Get a comparator used in an expression or create a comparator object.
+#' Get the comparator used in an expression or create a comparator object.
 #'
-#' @param object The object to be coerced to a '.Comparator' subclass or the
+#' @param object The object to be coerced to a '.comparator' subclass or the
 #'   expression object of which to obtain its comparator.
 #' @param ... Used by certain methods.
+#'
+#' @return An object belonging to the superclass \code{.comparator}
+#'
+#' @family comparator functions
 #'
 #' @export
 #' @rdname Comparator
@@ -14,11 +18,13 @@ setGeneric(
   valueClass = ".comparator"
 )
 
-#' Comparator<-.
+#' Comparator<-
 #'
 #' Set the comparator of an expression.
 #'
 #' @param value The value to set the comparator to.
+#'
+#' @family comparator functions
 #'
 #' @export
 #' @rdname Comparator
@@ -31,13 +37,30 @@ setGeneric(
   }
 )
 
+#' Comparison operators
+#'
+#' Binary operators used to define Google Analytics filters and segments.
+#'
+#' @param var The name of a single Google Analytics dimension or metric, as a
+#'   character string or a \code{.var} object generated with \code{\link{Var}}.
+#' @param operand An operand appropriate to the selected \code{var} and
+#'   comparison operator. A vector usually of length-one, or exactly length-two
+#'   in the case of \code{\%between\%}, or at least length-two in the case of
+#'   \code{\%in\%}. Usually either a character string or numeric value.
+#'
+#' @return an \code{expr} object.
+#'
+#' @family comparator functions
+#'
+#' @name comparators
+NULL
+
 #' @section \%starts_with\%:
-#' A condition where the dimension (LHS) matches values that start with
-#'   the character string given by the operand (RHS).
-#' @rdname Comparator
-#' @param var dimension object
-#' @param operand operand object
-#' @family comparators
+#' A condition where the dimension (LHS) matches values that start with the
+#' character string given by the operand (RHS).
+#' @examples
+#' Expr(~PagePath %starts_with% "/products")
+#' @rdname comparators
 #' @export
 setGeneric(
   "%starts_with%",
@@ -45,11 +68,14 @@ setGeneric(
   valueClass = ".dimExpr"
 )
 
+# Base R functions: `startsWith` and `endsWith`
+
 #' @section \%ends_with\%:
-#' A condition where the dimension (LHS) matches values that end with
-#'   the character string given by the operand (RHS).
-#' @rdname Comparator
-#' @family comparators
+#' A condition where the dimension (LHS) matches values that end with the
+#' character string given by the operand (RHS).
+#' @examples
+#' Expr(~PagePath %ends_with% "/index.html")
+#' @rdname comparators
 #' @export
 setGeneric(
   "%ends_with%",
@@ -58,10 +84,11 @@ setGeneric(
 )
 
 #' @section \%contains\%:
-#' A condition where the dimension (LHS) matches values that contain
-#'   the character string given by the operand (RHS).
-#' @rdname Comparator
-#' @family comparators
+#' A condition where the dimension (LHS) matches values that contain the
+#' character string given by the operand (RHS).
+#' @examples
+#' Expr(~PagePath %contains% "thank-you")
+#' @rdname comparators
 #' @export
 setGeneric(
   "%contains%",
@@ -70,10 +97,11 @@ setGeneric(
 )
 
 #' @section \%matches\%:
-#' A condition where the dimension (LHS) matches a regular
-#'   expression given by the operand (RHS).
-#' @rdname Comparator
-#' @family comparators
+#' A condition where the dimension (LHS) matches a regular expression given by
+#' the operand (RHS).
+#' @examples
+#' Expr(~PagePath %matches% "*.thank[\\-_]?you.*")
+#' @rdname comparators
 #' @export
 setGeneric(
   "%matches%",
@@ -81,12 +109,15 @@ setGeneric(
   valueClass = ".dimExpr"
 )
 
+# Base R function `grepl`
+
 #' @section \%between\%:
-#' A condition where the var (LHS) is within the lower and
-#'   upper bounds specified by first and second vector value (respectively) of
-#'   the operand (RHS).
-#' @rdname Comparator
-#' @family comparators
+#' A condition where the var (LHS) is within the lower and upper bounds
+#' specified by first and second vector value (respectively) of the operand
+#' (RHS).
+#' @examples
+#' Expr(~transactionRevenue %between% c(200, 500))
+#' @rdname comparators
 #' @export
 setGeneric(
   "%between%",
@@ -95,22 +126,21 @@ setGeneric(
 )
 
 #' @section \%in\%:
-#' A condition where the dimension (LHS) matches one of the
-#'   values in the vector specified by the operand (RHS).
-#' @rdname Comparator
-#' @param x Dimension or metric object
-#' @param table Operand object
-#' @family comparators
+#' A condition where the dimension (LHS) matches one of the values in the vector
+#' specified by the operand (RHS).
+#' @examples
+#' Expr(~browser %in% c("Chrome", "Firefox"))
+#' @rdname comparators
 #' @export
 setGeneric("%in%")
 
-#' IsRegEx.
+#' IsRegEx
 #'
 #' Checks for a regular expression.
 #'
 #' @param object An object to check if whether a regular expression.
 #'
-#' @return TRUE or FALSE
+#' @return \code{TRUE} or \code{FALSE}
 #'
 #' @export
 setGeneric(

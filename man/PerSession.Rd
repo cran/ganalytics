@@ -8,7 +8,7 @@
 \alias{PerSession,gaSegmentSequenceFilter-method}
 \alias{PerSession,gaMetExpr-method}
 \alias{PerSession,formula-method}
-\title{PerSession.}
+\title{PerSession}
 \usage{
 PerSession(object, ..., negation)
 
@@ -23,22 +23,20 @@ PerSession(object, ..., negation)
 \S4method{PerSession}{formula}(object, ..., negation)
 }
 \arguments{
-\item{object}{a .gaSegmentFilter or gaMetExpr object to coerce to
-session-level. Alternatively, an dimension expression or segment filter to
-coerce into a session scoped gaDynSegment.}
+\item{object}{A \code{.gaSegmentFilter} or \code{gaMetExpr} object to coerce
+to session-level. Alternatively, an dimension expression or segment filter
+to coerce into a session scoped \code{gaDynSegment}.}
 
-\item{...}{Other filters to include in the gaDynSegment.}
+\item{...}{Other filters to include in the \code{gaDynSegment}.}
 
-\item{negation}{boolean value indicating whether to negate the condition.}
+\item{negation}{Boolean value indicating whether to negate the condition.}
 }
 \value{
-a gaMetExpr, .gaSegmentFilter or gaDynSegment.
-
-To define a gaDynSegment comprised of a single metric expression,
-wrap the metric expression in an \code{Include} or \code{Exclude} call.
+A \code{gaMetExpr}, \code{.gaSegmentFilter} or \code{gaDynSegment}.
 }
 \description{
-Set the scope of a .gaSegmentFilter or gaMetExpr object to session-level.
+Set the scope of a \code{.gaSegmentFilter} or \code{gaMetExpr} object to
+session-level.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -58,3 +56,22 @@ session-level.
 metric condition to session-level.
 }}
 
+\note{
+To define a \code{gaDynSegment} comprised of a single metric
+expression, wrap the metric expression in an \code{Include} or
+\code{Exclude} call.
+}
+\examples{
+spent_more_than_100_in_a_session <- PerSession(Expr(~transactionRevenue > 100))
+
+}
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerProduct}}, \code{\link{PerUser}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

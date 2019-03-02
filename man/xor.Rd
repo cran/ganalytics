@@ -4,7 +4,7 @@
 \name{xor}
 \alias{xor}
 \alias{xor,.compoundExpr,.compoundExpr-method}
-\title{Generate an expression that gives the EXCLUSIVE-OR of two expressions.}
+\title{xor}
 \usage{
 xor(x, y)
 
@@ -14,11 +14,11 @@ xor(x, y)
 \item{x, y}{Conditions for an EXCLUSIVE-OR expression.}
 }
 \description{
-Generate an expression that gives the EXCLUSIVE-OR of two expressions.
+\code{xor} produces a compound expression that gives the EXCLUSIVE-OR of two expressions.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{x = .compoundExpr,y = .compoundExpr}: Exclusive-OR two expressions.
+\item \code{x = .compoundExpr,y = .compoundExpr}: Exclusive-OR of two expressions.
 }}
 
 \examples{

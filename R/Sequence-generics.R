@@ -1,4 +1,4 @@
-#' Later.
+#' Later
 #'
 #' Treat a step within a sequence as happening at any point after any preceding
 #' steps in the sequence, i.e. 'later'. 'Later' means 'followed by', but not
@@ -8,9 +8,12 @@
 #' @param ... Any other expressions that should follow the first one but before
 #'   any others in the sequence.
 #'
-#' @return a gaSegmentSequenceStep object, with the immediate flag not set.
+#' @return A \code{gaSegmentSequenceStep} object, with the immediate flag not set.
 #'
-#' @seealso \code{\link{Sequence}}
+#' @examples
+#' purchased_sometime_later <- Later(Expr(~transactions > 0))
+#'
+#' @family sequence segment functions
 #'
 #' @export
 setGeneric(
@@ -19,7 +22,7 @@ setGeneric(
   valueClass = "gaSegmentSequenceStep"
 )
 
-#' Then.
+#' Then
 #'
 #' Treat a step within a sequence as happening immediately after any preceding
 #' steps in the sequence, i.e. 'immediately following'.
@@ -29,7 +32,12 @@ setGeneric(
 #' @param ... Any other expressions that should \bold{immediately} follow the
 #'   first one but before any others in the sequence.
 #'
-#' @return a gaSegmentSequenceStep object, with the immediate flag set.
+#' @return A \code{gaSegmentSequenceStep} object, with the immediate flag set.
+#'
+#' @examples
+#' purchased_immediately_after <- Then(Expr(~transactions > 0))
+#'
+#' @family sequence segment functions
 #'
 #' @export
 #' @seealso \code{\link{Sequence}}
@@ -39,7 +47,7 @@ setGeneric(
   valueClass = "gaSegmentSequenceStep"
 )
 
-#' First.
+#' First
 #'
 #' If used at the beginning of a sequence, indicates that this step must match
 #' the first interaction of included sessions and users within the select date
@@ -50,8 +58,12 @@ setGeneric(
 #' @param ... Any other expressions that should immediately follow the first
 #'   expression.
 #'
-#' @return a gaSegmentSequenceStep object, with the immediate flag set.
+#' @return A \code{gaSegmentSequenceStep} object, with the immediate flag set.
 #'
+#' @examples
+#' session_starts_from_home <- First(Expr(~pagepath == "/"))
+#'
+#' @family sequence segment functions
 #'
 #' @export
 #' @seealso \code{\link{Sequence}}
@@ -61,7 +73,7 @@ setGeneric(
   valueClass = "gaSegmentSequenceStep"
 )
 
-#' Sequence.
+#' Sequence
 #'
 #' Create a new gaSequence object
 #'
@@ -71,7 +83,7 @@ setGeneric(
 #'   they should be applied.
 #' @param negation Logical TRUE or FALSE to match segments where this sequence
 #'   has not occurred.
-#' @param scope optional scope, "users" or "sessions".
+#' @param scope Optional scope, "users" or "sessions".
 #'
 #' @examples
 #' expr1 <- Expr(~pagepath == "/")
@@ -84,22 +96,22 @@ setGeneric(
 #' expr8 <- Expr(~source == "google")
 #' Segment(
 #'   PerUser(
-#'     expr1, # treat an expression as 'condition type segment filter' by default
-#'     PerHit(
-#'       expr3
-#'     )
+#'     expr1,        # treat an expression as 'condition type segment filter' by default
+#'     PerHit(expr3)
 #'   ),
 #'   Sequence(
 #'     expr2,
-#'     Then(expr4), # 'then' means 'immediately followed by'
-#'     Later(expr5) # 'later' means 'followed by', but not necessarily immediately.
+#'     Then(expr4),  # 'then' means 'immediately followed by'.
+#'     Later(expr5)  # 'later' means 'followed by', but not necessarily immediately.
 #'   ),
 #'   Sequence(
 #'     First(expr6), # First expressly means 'first interaction' within the date range.
-#'     Then(expr7), # By default, treat an expression within a sequence as happening
-#'     expr8 # at any point after any preceding steps in the sequence, i.e. 'later'.
+#'     Then(expr7),  # By default, treat an expression within a sequence as happening
+#'     expr8         # at any point after any preceding steps in the sequence, i.e. 'later'.
 #'   )
 #' )
+#'
+#' @family sequence segment functions
 #'
 #' @export
 setGeneric(

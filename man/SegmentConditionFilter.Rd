@@ -4,7 +4,7 @@
 \name{SegmentConditionFilter}
 \alias{SegmentConditionFilter}
 \alias{SegmentConditionFilter,ANY-method}
-\title{SegmentConditionFilter.}
+\title{SegmentConditionFilter}
 \usage{
 SegmentConditionFilter(object, ..., negation, scope)
 
@@ -13,15 +13,17 @@ SegmentConditionFilter(object, ..., negation, scope)
 \arguments{
 \item{object}{An expression to be used as a non-sequential segment condition.}
 
-\item{...}{Other expressions to be ANDed to the first expression provided.}
+\item{...}{Other expressions to be \code{And}ed to the first expression
+provided.}
 
-\item{negation}{optional logical TRUE or FALSE to match segments where this condition
-has not been met. Default is FALSE, i.e. inclusive filter.}
+\item{negation}{Optional logical \code{TRUE} or \code{FALSE} to match
+segments where this condition has not been met. Default is \code{FALSE},
+i.e. inclusive filter.}
 
-\item{scope}{optional scope, "users" or "sessions".}
+\item{scope}{Optional scope, \code{"users"} or \code{"sessions"} (default).}
 }
 \value{
-a gaSegmentConditionFilter object.
+A \code{gaSegmentConditionFilter} object.
 }
 \description{
 Create a new gaSegmentConditionFilter object
@@ -34,3 +36,20 @@ hold true within a single session if applied to a gaDynSegment
 scoped at session-level, or to a single hit if scoped at user-level.
 }}
 
+\examples{
+bounced_sessions <- SegmentConditionFilter(Expr(~bounces > 0))
+return_shoppers <- SegmentConditionFilter(
+  Expr(~transactions > 1, metricScope = "perUser"),
+  scope = "users"
+)
+
+}
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerProduct}}, \code{\link{PerSession}},
+  \code{\link{PerUser}}, \code{\link{ScopeLevel}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

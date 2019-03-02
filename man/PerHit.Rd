@@ -6,7 +6,7 @@
 \alias{PerHit,.compoundExpr-method}
 \alias{PerHit,gaMetExpr-method}
 \alias{PerHit,formula-method}
-\title{PerHit.}
+\title{PerHit}
 \usage{
 PerHit(object, ..., negation)
 
@@ -17,20 +17,20 @@ PerHit(object, ..., negation)
 \S4method{PerHit}{formula}(object, ..., negation)
 }
 \arguments{
-\item{object}{a gaMetExpr object to coerce to hit-level or if multiple
+\item{object}{A \code{gaMetExpr} object to coerce to hit-level or if multiple
 expressions are provided, then the first expression to combine into a
-single step of sequence filter.}
+single step sequence filter.}
 
 \item{...}{Further expressions to be included in the filter definition if
 defining a sequence filter of length one.}
 
-\item{negation}{boolean value indicating whether to negate the condition.}
+\item{negation}{Boolean value indicating whether to negate the condition.}
 }
 \value{
-a gaMetExpr or gaSegmentSequenceFilter.
+A \code{gaMetExpr} or \code{gaSegmentSequenceFilter}.
 }
 \description{
-Set the scope of a gaMetExpr object to hit-level, or transforms a condition
+Set the scope of a \code{gaMetExpr} object to hit-level, or transforms a condition
 filter to a sequence filter of length one (i.e. a combination of conditions
 for matching a single hit).
 }
@@ -46,3 +46,22 @@ hit-level.
 metric condition to hit-level.
 }}
 
+\examples{
+spent_more_than_100_in_a_transaction <- PerHit(Expr(~transactionRevenue > 100))
+played_intro_video <- PerHit(
+  Expr(~eventCategory == "Video") &
+  Expr(~eventAction == "Play") &
+  Expr(~eventLabel == "Intro")
+)
+
+}
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerProduct}},
+  \code{\link{PerSession}}, \code{\link{PerUser}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

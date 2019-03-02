@@ -4,24 +4,25 @@
 \name{Include}
 \alias{Include}
 \alias{Include,ANY-method}
-\title{Include.}
+\title{Include}
 \usage{
 Include(object, ..., scope)
 
 \S4method{Include}{ANY}(object, ..., scope)
 }
 \arguments{
-\item{object}{a segment condition or sequence filter to include.}
+\item{object}{A segment condition or sequence filter to include.}
 
-\item{...}{additional segment conditions to include.}
+\item{...}{Additional segment conditions to include.}
 
-\item{scope}{optional scope, "users" or "sessions"}
+\item{scope}{Optional scope, \code{"users"} or \code{"sessions"} (default).}
 }
 \value{
-a .gaSegmentFilter object with its negate slot set to FALSE.
+A \code{.gaSegmentFilter} object with its negate slot set to
+\code{FALSE}.
 }
 \description{
-Set the negation flag of a segment filter to FALSE.
+Set the negation flag of a segment filter to \code{FALSE}.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -29,3 +30,20 @@ Set the negation flag of a segment filter to FALSE.
 expression.
 }}
 
+\examples{
+return_shoppers <- Include(
+  Expr(~transactions > 1, metricScope = "perUser"),
+  scope = "users"
+)
+
+}
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{IsNegated}},
+  \code{\link{PerHit}}, \code{\link{PerProduct}},
+  \code{\link{PerSession}}, \code{\link{PerUser}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

@@ -3,7 +3,7 @@
 \name{StartDate}
 \alias{StartDate}
 \alias{StartDate<-}
-\title{StartDate.}
+\title{StartDate}
 \usage{
 StartDate(object, value)
 
@@ -12,7 +12,7 @@ StartDate(object) <- value
 \arguments{
 \item{object}{Object to get start date of.}
 
-\item{value}{value to set start date of object to.}
+\item{value}{Value to set start date of object to.}
 }
 \description{
 Get the start date.
@@ -21,9 +21,11 @@ Set the start date.
 }
 \seealso{
 Other date range functions: \code{\link{Cohort}},
-  \code{\link{DateRange}}, \code{\link{EndDate}}
+  \code{\link{DateRange}}, \code{\link{EndDate}},
+  \code{\link{SplitDateRange}}
 
 Other date range functions: \code{\link{Cohort}},
-  \code{\link{DateRange}}, \code{\link{EndDate}}
+  \code{\link{DateRange}}, \code{\link{EndDate}},
+  \code{\link{SplitDateRange}}
 }
 \concept{date range functions}

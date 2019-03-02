@@ -11,7 +11,8 @@ NULL
 #' Create a ganalytics query object
 #'
 #' @param view view id to use
-#' @param creds authentication credentials object created using GoogleApiCreds()
+#' @param creds authentication credentials object created using
+#'   \code{GoogleApiCreds()}
 #' @param startDate start date
 #' @param endDate end date
 #' @param metrics character vector of metrics
@@ -20,9 +21,9 @@ NULL
 #' @param filters a filters object
 #' @param segments a segment object or list of segments
 #' @param cohorts a cohort object or a list of cohorts
-#' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
-#' @param maxResults the maximum number of results to return,
-#'  up to 1,000,000
+#' @param samplingLevel either \code{"DEFAULT"}, \code{"HIGHER_PRECISION"} or
+#'   \code{"FASTER"}
+#' @param maxResults the maximum number of results to return, up to 1,000,000
 #'
 #' @export
 GaQuery <- function(
@@ -79,7 +80,7 @@ GaQuery <- function(
 #' @param dimensions character vector of dimensions
 #' @param sortBy a sort by object
 #' @param filters a filters object
-#' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
+#' @param samplingLevel either \code{"DEFAULT"}, \code{"HIGHER_PRECISION"} or \code{"FASTER"}
 #' @param maxResults the maximum number of results to return,
 #'  up to 1,000,000
 #'
@@ -123,11 +124,11 @@ McfQuery <- function(
 #' Create a Real-Time reporting API query object
 #'
 #' @param view view id to use
-#' @param creds authentication credentials object created using GoogleApiCreds()
+#' @param creds authentication credentials object created using \code{GoogleApiCreds()}
 #' @param metrics character vector of metrics
 #' @param dimensions character vector of dimensions
-#' @param sortBy a sort by object
-#' @param filters a filters object
+#' @param sortBy a \code{.sortBy} object
+#' @param filters a \code{.tableFilter} object
 #' @param maxResults the maximum number of results to return,
 #'  up to 1,000,000
 #'
@@ -162,7 +163,8 @@ modify_query <- function(
   query, # A single query object
   ids = NA, # A vector of of view IDs
   periods = NA, # A vector of lubridate period objects
-  columns = NA, # metrics, dimensions and sorting are inferred by non ambiguious character vector called columns
+  columns = NA, # metrics, dimensions and sorting are inferred by non ambiguious
+                # character vector called columns
   filters = NA, # A vector of gaFilter objects
   segments = NA, # A vector of gaSegment objects
   sampling_level = NA,
@@ -214,21 +216,36 @@ modify_query <- function(
   # dateRange
 }
 
-#' @describeIn MaxResults Return the maximum number of rows a query is allowed to return.
+#' @describeIn MaxResults Return the maximum number of rows a query is allowed
+#'   to return.
 setMethod(
   f = "MaxResults",
-  signature = ".query",
+  signature = c(".query", "missing"),
   definition = function(object) {
     object@maxResults
   }
 )
 
-#' @describeIn MaxResults Set the maximum number of rows a query is allowed to return.
+#' @describeIn MaxResults Set the maximum number of rows a query is allowed to
+#'   return.
+setMethod(
+  f = "MaxResults",
+  signature = c(".query", "ANY"),
+  definition = function(object, value) {
+    object@maxResults <- as.integer(value)
+    validObject(object)
+    object
+  }
+)
+
+#' @describeIn MaxResults Set the maximum number of rows a query is allowed to
+#'   return.
 setMethod(
   f = "MaxResults<-",
   signature = c(".query", "ANY"),
   definition = function(object, value) {
     object@maxResults <- as.integer(value)
+    validObject(object)
     object
   }
 )
@@ -237,9 +254,20 @@ setMethod(
 #'   has been set to.
 setMethod(
   f = "SamplingLevel",
-  signature = ".standardQuery",
+  signature = c(".standardQuery", "missing"),
   definition = function(object) {
     object@samplingLevel
+  }
+)
+
+#' @describeIn SamplingLevel Set the sampling level of the query.
+setMethod(
+  f = "SamplingLevel",
+  signature = c(".standardQuery", "ANY"),
+  definition = function(object, value) {
+    object@samplingLevel <- as.character(value)
+    validObject(object)
+    object
   }
 )
 
@@ -249,6 +277,7 @@ setMethod(
   signature = c(".standardQuery", "ANY"),
   definition = function(object, value) {
     object@samplingLevel <- as.character(value)
+    validObject(object)
     object
   }
 )

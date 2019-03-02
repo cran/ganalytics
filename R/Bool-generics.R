@@ -1,6 +1,6 @@
-#' Not.
+#' Not
 #'
-#' Invert an expression, i.e. NOT.
+#' \code{Not} inverts an expression, i.e. logical NOT.
 #'
 #' @param object An object to get the logical inverse of.
 #'
@@ -14,21 +14,24 @@
 #' @aliases `!`
 #'
 #' @export
-#' @rdname Not
 setGeneric(
   "Not",
   function(object) {standardGeneric("Not")},
   valueClass = c(".comparator", ".compoundExpr", ".gaSegmentFilter")
 )
 
-#' Or.
+#' Or
 #'
-#' OR two or more expressions.
+#' Logical OR of two or more expressions.
 #'
-#' @param object The first object to include within the OR expression.
-#' @param ... Additional objects to include within the OR expression.
+#' @param object An object to include within the ORed expression.
+#' @param ... Additional objects to include within the ORed expression.
 #'
-#' @return An object of class orExpr.
+#' @return An object of class \code{orExpr}.
+#'
+#' @note Google Analytics does not support ORing of ANDed expressions -- Only
+#'   ANDing of ORed expresisons are supported. Consider De Morgan's laws for
+#'   possible ways to work around this limitation.
 #'
 #' @examples
 #' mobile_or_tablet <- Expr(~deviceCategory == "mobile") | Expr(~deviceCategory == "tablet")
@@ -39,21 +42,20 @@ setGeneric(
 #' @aliases `|`
 #'
 #' @export
-#' @rdname Or
 setGeneric(
   "Or",
   function(object, ...) {standardGeneric("Or")},
   valueClass = "orExpr"
 )
 
-#' And.
+#' And
 #'
-#' AND two or more ganalytics expressions together.
+#' Logical AND of two or more expressions.
 #'
-#' @param object The first object within the AND expression
-#' @param ... Additional objects to include within the AND expression.
+#' @param object An object to include within the ANDed expression.
+#' @param ... Additional objects to include within the ANDed expression.
 #'
-#' @return an object of class \code{andExpr}
+#' @return An object of class \code{andExpr}
 #'
 #' @examples
 #' purchased_on_mobile <- Expr(~deviceCategory == "mobile") & Expr(~transactions > 0)
@@ -63,14 +65,15 @@ setGeneric(
 #' @aliases `&`
 #'
 #' @export
-#' @rdname And
 setGeneric(
   "And",
   function(object, ...) {standardGeneric("And")},
   valueClass = "andExpr"
 )
 
-#' Generate an expression that gives the EXCLUSIVE-OR of two expressions.
+#' xor
+#'
+#' \code{xor} produces a compound expression that gives the EXCLUSIVE-OR of two expressions.
 #'
 #' @param x,y Conditions for an EXCLUSIVE-OR expression.
 #'
@@ -83,6 +86,5 @@ setGeneric(
 #' @family boolean functions
 #'
 #' @export
-#' @rdname xor
 setGeneric("xor")
 

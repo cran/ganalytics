@@ -6,8 +6,6 @@
 #' @importFrom methods as callNextMethod
 NULL
 
-# ---- %matches%, %between%, %starts_with%, %in%, ==, !=, >, <, >=, <= ----
-
 setMethod(
   f = "initialize",
   signature = ".comparator",
@@ -57,7 +55,9 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+# ---- %matches%, %between%, %starts_with%, %in%, ==, !=, >, <, >=, <= ----
+
+#' @rdname comparators
 setMethod(
   f = "%matches%",
   signature = c(".var", ".dimOperand"),
@@ -66,7 +66,7 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @rdname comparators
 setMethod(
   f = "%starts_with%",
   signature = c(".var", ".dimOperand"),
@@ -75,7 +75,7 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @rdname comparators
 setMethod(
   f = "%ends_with%",
   signature = c(".var", ".dimOperand"),
@@ -84,7 +84,7 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @rdname comparators
 setMethod(
   f = "%contains%",
   signature = c(".var", ".dimOperand"),
@@ -93,7 +93,7 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @rdname comparators
 setMethod(
   f = "%between%",
   signature = c(".var", ".operand"),
@@ -102,7 +102,9 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @rdname comparators
+#' @param x A dimension.
+#' @param table A vector of possible values within that dimension.
 setMethod(
   f = "%in%",
   signature = c(".var", ".operand"),
@@ -111,9 +113,14 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
-#' @param e1 Dimension or metric object
-#' @param e2 Operand object
+#' @section Equal-to (\code{==}):
+#' Do the values on the left and right match exactly.
+#' @param e1 A dimension or metric.
+#' @param e2 An operand object of length-one.
+#' @examples
+#' Expr(~productName == "apple")
+#' Expr(~bounces == 0)
+#' @rdname comparators
 setMethod(
   f = "==",
   signature = c(".var", ".operand"),
@@ -122,7 +129,12 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @section Not equal-to (\code{!=}):
+#' Do the values on the left and right not match.
+#' @examples
+#' Expr(~deviceCategory != "tablet")
+#' Expr(~sessionDuration != 0)
+#' @rdname comparators
 setMethod(
   f = "!=",
   signature = c(".var", ".operand"),
@@ -131,7 +143,11 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @section Greater-than (\code{>}):
+#' Is the value on the left greater than the value on the right.
+#' @examples
+#' Expr(~pageviews > 100)
+#' @rdname comparators
 setMethod(
   f = ">",
   signature = c(".var", ".metOperand"),
@@ -140,7 +156,11 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @section Less-than (\code{<}):
+#' Is the value on the left less than the value on the right.
+#' @examples
+#' Expr(~exits < 100)
+#' @rdname comparators
 setMethod(
   f = "<",
   signature = c(".var", ".metOperand"),
@@ -149,7 +169,9 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @section Greater-than-or-equal-to (\code{>=}):
+#' Is the value on the left greater than or equal to the value on the right.
+#' @rdname comparators
 setMethod(
   f = ">=",
   signature = c(".var", ".metOperand"),
@@ -158,7 +180,9 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @section Less-than-or-equal-to (\code{<=}):
+#' Is the value on the left less than or equal to the value on the right.
+#' @rdname comparators
 setMethod(
   f = "<=",
   signature = c(".var", ".metOperand"),

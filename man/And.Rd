@@ -6,7 +6,7 @@
 \alias{`&`}
 \alias{And,.compoundExpr-method}
 \alias{&,.compoundExpr,.compoundExpr-method}
-\title{And.}
+\title{And}
 \usage{
 And(object, ...)
 
@@ -15,25 +15,25 @@ And(object, ...)
 \S4method{&}{.compoundExpr,.compoundExpr}(e1, e2)
 }
 \arguments{
-\item{object}{The first object within the AND expression}
+\item{object}{An object to include within the ANDed expression.}
 
-\item{...}{Additional objects to include within the AND expression.}
+\item{...}{Additional objects to include within the ANDed expression.}
 
 \item{e1}{first expression}
 
 \item{e2}{second expression}
 }
 \value{
-an object of class \code{andExpr}
+An object of class \code{andExpr}
 }
 \description{
-AND two or more ganalytics expressions together.
+Logical AND of two or more expressions.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.compoundExpr}: AND two or more expressions.
+\item \code{.compoundExpr}: Logical-AND of two or more expressions.
 
-\item \code{e1 = .compoundExpr,e2 = .compoundExpr}: AND two expressions.
+\item \code{e1 = .compoundExpr,e2 = .compoundExpr}: Logical-AND of two expressions.
 }}
 
 \examples{

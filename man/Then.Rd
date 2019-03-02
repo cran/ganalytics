@@ -2,7 +2,7 @@
 % Please edit documentation in R/Sequence-generics.R
 \name{Then}
 \alias{Then}
-\title{Then.}
+\title{Then}
 \usage{
 Then(object, ...)
 }
@@ -14,12 +14,20 @@ the sequence.}
 first one but before any others in the sequence.}
 }
 \value{
-a gaSegmentSequenceStep object, with the immediate flag set.
+A \code{gaSegmentSequenceStep} object, with the immediate flag set.
 }
 \description{
 Treat a step within a sequence as happening immediately after any preceding
 steps in the sequence, i.e. 'immediately following'.
 }
+\examples{
+purchased_immediately_after <- Then(Expr(~transactions > 0))
+
+}
 \seealso{
 \code{\link{Sequence}}
+
+Other sequence segment functions: \code{\link{First}},
+  \code{\link{Later}}, \code{\link{Sequence}}
 }
+\concept{sequence segment functions}

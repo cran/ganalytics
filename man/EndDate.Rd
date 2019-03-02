@@ -3,7 +3,7 @@
 \name{EndDate}
 \alias{EndDate}
 \alias{EndDate<-}
-\title{EndDate.}
+\title{EndDate}
 \usage{
 EndDate(object, value)
 
@@ -12,7 +12,7 @@ EndDate(object) <- value
 \arguments{
 \item{object}{Object to get end date of.}
 
-\item{value}{value to set end date of object to.}
+\item{value}{Value to set end date of object to.}
 }
 \description{
 Get the end date of the date range.
@@ -21,9 +21,11 @@ Set the endDate of the date range.
 }
 \seealso{
 Other date range functions: \code{\link{Cohort}},
-  \code{\link{DateRange}}, \code{\link{StartDate}}
+  \code{\link{DateRange}}, \code{\link{SplitDateRange}},
+  \code{\link{StartDate}}
 
 Other date range functions: \code{\link{Cohort}},
-  \code{\link{DateRange}}, \code{\link{StartDate}}
+  \code{\link{DateRange}}, \code{\link{SplitDateRange}},
+  \code{\link{StartDate}}
 }
 \concept{date range functions}

@@ -8,7 +8,7 @@
 \alias{PerUser,gaSegmentSequenceFilter-method}
 \alias{PerUser,gaMetExpr-method}
 \alias{PerUser,formula-method}
-\title{PerUser.}
+\title{PerUser}
 \usage{
 PerUser(object, ..., negation)
 
@@ -23,22 +23,19 @@ PerUser(object, ..., negation)
 \S4method{PerUser}{formula}(object, ..., negation)
 }
 \arguments{
-\item{object}{a .gaSegmentFilter or gaMetExpr object to coerce to
+\item{object}{a \code{.gaSegmentFilter} or \code{gaMetExpr} object to coerce to
 user-level. Alternatively, an dimension expression or segment filter to
-coerce into a user scoped gaDynSegment.}
+coerce into a user scoped \code{gaDynSegment}.}
 
-\item{...}{Other filters to include in the gaDynSegment.}
+\item{...}{Other filters to include in the \code{gaDynSegment}.}
 
-\item{negation}{boolean value indicating whether to negate the condition.}
+\item{negation}{Boolean value indicating whether to negate the condition.}
 }
 \value{
-a gaMetExpr, .gaSegmentFilter or gaDynSegment.
-
-To define a gaDynSegment comprised of a single metric expression,
-wrap the metric expression in an \code{Include} or \code{Exclude} call.
+A \code{gaMetExpr}, \code{.gaSegmentFilter} or \code{gaDynSegment}.
 }
 \description{
-Set the scope of a .gaSegmentFilter or gaMetExpr object to user-level.
+Set the scope of a \code{.gaSegmentFilter} or \code{gaMetExpr} object to user-level.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -58,3 +55,21 @@ user-level.
 metric condition to user-level.
 }}
 
+\note{
+To define a \code{gaDynSegment} comprised of a single metric expression,
+wrap the metric expression in an \code{Include} or \code{Exclude} call.
+}
+\examples{
+spent_more_than_100_per_user <- PerUser(Expr(~transactionRevenue > 100))
+
+}
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerProduct}}, \code{\link{PerSession}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

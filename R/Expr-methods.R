@@ -49,6 +49,8 @@ setMethod("Expr", ".expr", function(object) {object})
 #' @describeIn Expr Use non-standard formula evaluation to define an expression.
 #'   Accepts a formula in the form of: \code{~ <variable> <comparator>
 #'   <operand>} where only the \code{<operand>} is evaluated.
+#' @examples
+#' source_google <- Expr(~source == "google")
 setMethod(
   f = "Expr",
   signature = c("formula", "ANY"),
@@ -61,8 +63,11 @@ setMethod(
   }
 )
 
-#' @describeIn Expr Return an expression based on the described variable,
+#' @describeIn Expr Return an expression composed of the supplied variable,
 #'   comparator and operand arguments.
+#' @examples
+#' source_google <- Expr("source", "==", "google")
+#' bounces <- Expr("bounces", ">", 0)
 setMethod(
   f = "Expr",
   signature = c("character", "character", "ANY", "ANY"),
@@ -78,8 +83,9 @@ setMethod(
   }
 )
 
-#' @describeIn GaExpr Return a Google Analytics expression using the described
+#' @describeIn GaExpr Return a Google Analytics expression using the supplied
 #'   variable, operator and operand.
+#'   bounces <- GaExpr("bounces", ">", 0)
 setMethod(
   f = "GaExpr",
   signature = c("character", "character", "ANY"),
@@ -112,7 +118,7 @@ setMethod(
   }
 )
 
-#' @describeIn McfExpr Return a Multi-channel Funnel condition based on the
+#' @describeIn McfExpr Return a Multi-channel Funnel condition composed of the
 #'   supplied arguments describing the variable, comparator and operator.
 setMethod(
   f = "McfExpr",
@@ -176,6 +182,8 @@ setMethod(
   signature = c("gaSegMetExpr", "character"),
   definition = function(object, value) {
     object@metricScope <- value
+    validObject(object)
+    object
   }
 )
 
